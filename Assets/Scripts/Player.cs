@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         holdingSheepModel.SetActive(isSheepCollected);
 
 
-        if (IsQuestGiverInRange() | (IsTargetInRange() && questGiven))
+        if (IsQuestGiverInRange() | (IsTargetInRange() && questGiven) && !questSubject.IsQuestComplete())
         {
             interactText.SetActive(true);
         }
