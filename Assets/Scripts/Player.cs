@@ -3,7 +3,7 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    private QuestSubject questSubject = new QuestSubject();
+    public QuestSubject questSubject = new QuestSubject();
     private QuestLogObserver questLogObserver;
     public bool isSheepCollected = false;
     public bool questGiven = false;

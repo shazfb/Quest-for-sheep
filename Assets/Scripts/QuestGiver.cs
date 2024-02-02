@@ -9,7 +9,6 @@ public class QuestGiver : MonoBehaviour
     public bool QuestGiven;
     public bool QuestDone;
     
-    private QuestSubject questSubject = new QuestSubject();
 
     public void Start()
     {
@@ -27,11 +26,13 @@ public class QuestGiver : MonoBehaviour
             QuestGiven = true;
             questgiverAnimator.SetBool("QuestGiven", true);
         }
-        if (questSubject.IsQuestComplete())
+        if (player.questSubject.IsQuestComplete())
         {
             QuestDone = true;
             questgiverAnimator.SetBool("QuestDone", true);
         }
     }
+
+
 }
 
