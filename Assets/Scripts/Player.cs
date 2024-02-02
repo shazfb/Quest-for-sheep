@@ -16,24 +16,26 @@ public class Player : MonoBehaviour
     public TMP_Text questText;
 
     public TextMeshProUGUI sheepCollectedText;
-    public GameObject idleModel;
-    public GameObject holdingSheepModel;
+    
+    public GameObject SheepModel;
 
+   
     private void Start()
     {
         interactText.SetActive(false);
         questTextObject.SetActive(false);
         questCountertext.SetActive(false);
         sheepCollectedText.text = questSubject.itemsCollected.ToString();
-        idleModel.SetActive(true);
-        holdingSheepModel.SetActive(false);
+
+               
+        SheepModel.SetActive(false);
     }
 
     private void Update()
     {
-        idleModel.SetActive(!isSheepCollected);
-        holdingSheepModel.SetActive(isSheepCollected);
-
+        
+        SheepModel.SetActive(isSheepCollected);
+        
 
         if (IsQuestGiverInRange() | (IsTargetInRange() && questGiven) && !questSubject.IsQuestComplete())
         {

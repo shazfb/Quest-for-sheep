@@ -7,14 +7,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float jumpForce = 10f;
     [SerializeField] float rotationSpeed = 5f;
+    public bool isJumping;
+    public bool isMoving;
 
     private Vector2 move;
     private bool isGrounded;
+
+    public Animator playerAnimator;
+    public Player player;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerAnimator = gameObject.GetComponent<Animator>();
     }
 
     private void Update()
@@ -22,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
         HandleMovementInput();
         HandleMouseRotation();
         HandleJumpInput();
+
+        UpdateAnimatorParameters();
     }
 
     private void HandleMovementInput()
@@ -34,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = (forward + right).normalized;
         transform.Translate(movement * speed * Time.deltaTime, Space.World);
+
+        isMoving = Mathf.Abs(move.x) > 0.1f || Mathf.Abs(move.y) > 0.1f;
     }
 
     private void HandleMouseRotation()
@@ -58,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
+            isJumping = true;
         }
     }
 
@@ -66,6 +78,17 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            isJumping = false;
+        }
+    }
+
+    private void UpdateAnimatorParameters()
+    {
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool("IsJumping", isJumping);
+            playerAnimator.SetBool("IsMoving", isMoving);
+            playerAnimator.SetBool("SheepCollected", player.isSheepCollected);
         }
     }
 }
