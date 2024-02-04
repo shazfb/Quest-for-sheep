@@ -46,19 +46,19 @@ public class Player : MonoBehaviour
             interactText.SetActive(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && IsQuestGiverInRange())
+        if (Input.GetButtonDown("Interact") && IsQuestGiverInRange())
         {
             TriggerQuest();
             questCountertext.SetActive(true);
             questGiven = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && IsQuestGiverInRange() && isSheepCollected)
+        if (Input.GetButtonDown("Interact") && IsQuestGiverInRange() && isSheepCollected)
         {
             CollectItem();         
         }
 
-        if (IsTargetInRange() && Input.GetKeyDown(KeyCode.E) && !isSheepCollected && questGiven)
+        if (IsTargetInRange() && Input.GetButtonDown("Interact") && !isSheepCollected && questGiven)
         {
             isSheepCollected = true; 
             DeactivateSheep();
@@ -70,12 +70,12 @@ public class Player : MonoBehaviour
             
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && IsQuestGiverInRange() && questSubject.IsQuestComplete())
+        if (Input.GetButtonDown("Interact") && IsQuestGiverInRange() && questSubject.IsQuestComplete())
         {
             questText.SetText("Quest Complete!");
             questCountertext.SetActive(false);
         }
-        else if (Input.GetKeyDown(KeyCode.E) && IsQuestGiverInRange() && !questSubject.IsQuestComplete())
+        else if (Input.GetButtonDown("Interact") && IsQuestGiverInRange() && !questSubject.IsQuestComplete())
         {
             if (!isSheepCollected)
             {
